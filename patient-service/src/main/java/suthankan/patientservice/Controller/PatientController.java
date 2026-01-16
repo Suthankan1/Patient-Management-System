@@ -11,6 +11,7 @@ import suthankan.patientservice.dto.PatientRequestDTO;
 import suthankan.patientservice.dto.PatientResponseDTO;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/patients")
@@ -33,5 +34,12 @@ public class PatientController {
         PatientResponseDTO patientResponseDTO = patientService.createPatient(patientRequestDTO);
         return new ResponseEntity<>(patientResponseDTO, HttpStatus.OK);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?>  deletePatient(@PathVariable UUID id){
+        patientService.deletePatient(id);
+        return ResponseEntity.noContent().build();
+    }
+
 
 }

@@ -9,6 +9,7 @@ import suthankan.patientservice.model.Patient;
 import suthankan.patientservice.repository.PatientRepository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class PatientService {
@@ -28,5 +29,9 @@ public class PatientService {
     public PatientResponseDTO createPatient(PatientRequestDTO patientRequestDTO){
         Patient patient = patientRepository.save(PatientMapper.toModel(patientRequestDTO));
         return PatientMapper.toDTO(patient);
+    }
+
+    public void deletePatient(UUID id){
+        patientRepository.deleteById(id);
     }
 }
