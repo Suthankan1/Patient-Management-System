@@ -31,7 +31,15 @@ public class PatientService {
         return PatientMapper.toDTO(patient);
     }
 
+    public PatientResponseDTO updatePatient(UUID id, PatientRequestDTO patientRequestDTO) {
+        Patient existingPatient = patientRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Patient not found with id: " + id));
+        Patient updatedPatient = patientRepository.save(PatientMapper.toModel(patientRequestDTO));
+        return PatientMapper.toDTO(updatedPatient);
+    }
+
     public void deletePatient(UUID id){
         patientRepository.deleteById(id);
     }
+
 }
